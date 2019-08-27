@@ -1,7 +1,9 @@
+# Set local target name
+set(target_name ${PROJECT_NAME}-gui-osg)
+set(component_name gui-osg)
+
 # Dependency checks
-if (NOT TARGET dart-gui)
-  return()
-endif()
+dart_check_dependent_target(${target_name} dart-gui)
 
 # OpenSceneGraph
 if(DART_BUILD_GUI_OSG)
@@ -41,7 +43,7 @@ if(DART_BUILD_GUI_OSG)
         set(warning_msg "Could NOT find OpenSceneGraph nor OpenThreads")
       endif()
     endif()
-    message(STATUS "${warning_msg} -- we will skip dart-gui-osg\n"
+    message(WARNING "${warning_msg} -- we will skip dart-gui-osg\n"
             "If you believe you do have both OSG and OpenThreads installed, try setting OSG_DIR")
     return()
   endif()
@@ -61,10 +63,6 @@ set(dart_gui_osg_hdrs ${hdrs})
 set(dart_gui_osg_srcs ${srcs})
 
 add_subdirectory(render)
-
-# Set local target name
-set(target_name ${PROJECT_NAME}-gui-osg)
-set(component_name gui-osg)
 
 # Add target
 dart_add_library(${target_name} ${hdrs} ${srcs} ${dart_gui_osg_hdrs} ${dart_gui_osg_srcs})
