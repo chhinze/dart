@@ -36,10 +36,7 @@ class ContactVisualizingNode(dart.gui.osg.RealTimeWorldNode):
         self._pointCloudShape.setPoint(contactPoints)
 
     def _getListOfContactPoints(self):
-        return [
-            c.point
-            for c in self.getWorld().getLastCollisionResult().getContacts()
-        ]
+        return [c.point for c in self.getWorld().getLastCollisionResult().getContacts()]
 
 
 def setAlpha(skeleton, alphaValue):
